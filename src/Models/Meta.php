@@ -1,6 +1,6 @@
 <?php
 
-namespace Rumur\WPModels;
+namespace Rumur\WPEloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

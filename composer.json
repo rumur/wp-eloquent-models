@@ -1,0 +1,22 @@
+{
+  "name": "rumur/wp-eloquent",
+  "description": "Eloquent wrapper of WordPress Models",
+  "keywords": ["wordpress", "plugin", "orm", "eloquent", "sql", "wpdb"],
+  "homepage": "https://github.com/rumur/wp-to-eloquent",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "rumur",
+      "email": "rumur.dev@gmail.com"
+    }
+  ],
+  "autoload" : {
+    "psr-4" : {
+      "Rumur\\WPEloquent\\": "src/"
+    }
+  },
+  "require": {
+    "illuminate/database": "^5.8",
+    "illuminate/pagination": "^5.8"
+  }
+}

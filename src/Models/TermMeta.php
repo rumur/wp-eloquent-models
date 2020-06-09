@@ -2,8 +2,8 @@
 
 namespace Rumur\WPEloquent\Models;
 
-class PostMeta extends Meta
+class TermMeta extends Meta
 {
     /** @var string  */
-    protected $table = 'postmeta';
+    protected $table = 'termmeta';
 }

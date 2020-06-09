@@ -1,14 +1,16 @@
 <?php
 
-namespace Rumur\WPModels;
+namespace Rumur\WPEloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Arr;
+use Rumur\WPEloquent\Models\Contracts\WordPressEntitiable;
 
-class Post extends Model
+class Post extends Model implements WordPressEntitiable
 {
     /**
      * The attributes that should be mutated to dates.
@@ -79,6 +81,20 @@ class Post extends Model
     }
 
     /**
+     * Represents an instance as a \WP_Post WordPress Entity
+     *
+     * @return \WP_Post
+     */
+    public function toWordPressEntity(): \WP_Post
+    {
+        return new \WP_Post((object)Arr::except($this->toArray(), [
+            'comments',
+            'author',
+            'meta',
+        ]));
+    }
+
+    /**
      * Scope a query by a `post_status`.
      *
      * @param Builder $query
@@ -107,9 +123,9 @@ class Post extends Model
         return $query
             // Explicit Select in order to get rid of results from joined tables
             // @link https://github.com/laravel/framework/issues/4962
-            ->select("{$this->table}.*")
+            ->select("{$this->getTable()}.*")
             ->join("term_relationships as tr{$num}", function (JoinClause $join) use ($num, $taxonomy) {
-                $join->on("{$this->table}.ID", '=', "tr{$num}.object_id")
+                $join->on("{$this->getTable()}.ID", '=', "tr{$num}.object_id")
                     ->join("term_taxonomy as tt{$num}", static function (JoinClause $join) use ($num, $taxonomy) {
                         $join->on("tt{$num}.term_taxonomy_id", '=', "tr{$num}.term_taxonomy_id")
                             ->where("tt{$num}.taxonomy", $taxonomy);
