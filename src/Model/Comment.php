@@ -1,12 +1,10 @@
 <?php
 
-namespace Rumur\WPEloquent\Models;
+namespace Rumur\WPEloquent\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Arr;
-use Rumur\WPEloquent\Models\Contracts\WordPressEntitiable;
+use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
 
 class Comment extends Model implements WordPressEntitiable
 {
@@ -53,23 +51,24 @@ class Comment extends Model implements WordPressEntitiable
     /**
      * Describes relationships between Models and @return HasMany
      *
-     * @see CommentMeta
+     * @see Comment\Meta
      */
     public function meta(): HasMany
     {
-        return $this->hasMany(CommentMeta::class, 'comment_id');
+        return $this->hasMany(Comment\Meta::class, 'comment_id');
     }
 
     /**
      * Represents an instance as a WordPress entity.
      * 
-     * @return \WP_Comment
+     * @return null|\WP_Comment
      */
-    public function toWordPressEntity(): \WP_Comment
+    public function toWordPressEntity(): ?\WP_Comment
     {
-        return new \WP_Comment((object) Arr::except($this->toArray(), [
-            'meta',
-            'post',
-        ]));
+        if (!class_exists(\WP_Comment::class)) {
+            return null;
+        }
+
+        return new \WP_Comment((object)$this->attributesToArray());
     }
 }
