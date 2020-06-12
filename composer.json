@@ -1,8 +1,8 @@
 {
-  "name": "rumur/wp-eloquent",
+  "name": "rumur/wp-eloquent-models",
   "description": "Eloquent wrapper of WordPress Models",
   "keywords": ["wordpress", "plugin", "orm", "eloquent", "sql", "wpdb"],
-  "homepage": "https://github.com/rumur/wp-to-eloquent",
+  "homepage": "https://github.com/rumur/wp-eloquent-models",
   "license": "MIT",
   "authors": [
     {

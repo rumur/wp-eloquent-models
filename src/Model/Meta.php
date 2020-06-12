@@ -1,8 +1,9 @@
 <?php
 
-namespace Rumur\WPEloquent\Models;
+namespace Rumur\WPEloquent\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Rumur\WPEloquent\Utils\Serializer;
 
 abstract class Meta extends Model
 {
@@ -23,13 +24,12 @@ abstract class Meta extends Model
     /**
      * Accessor for `meta_value`.
      *
-     * @uses maybe_unserialize
      * @param mixed $value
      * @return mixed
      */
     public function getMetaValueAttribute($value)
     {
-        return maybe_unserialize($value);
+        return Serializer::maybeUnserialize($value);
     }
 
     /**
@@ -41,6 +41,6 @@ abstract class Meta extends Model
      */
     public function setMetaValueAttribute($value)
     {
-        return $this->attributes['meta_value'] = maybe_serialize($value);
+        return $this->attributes['meta_value'] = Serializer::maybeSerialize($value);
     }
 }

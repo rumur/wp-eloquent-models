@@ -1,17 +1,27 @@
 <?php
 
-namespace Rumur\WPEloquent\Models;
+namespace Rumur\WPEloquent\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Query\JoinClause;
-use Illuminate\Support\Arr;
-use Rumur\WPEloquent\Models\Contracts\WordPressEntitiable;
+use Rumur\WPEloquent\Concerns\HasMeta;
+use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
 
+/**
+ * Class Post
+ * @package Rumur\WPEloquent\Model
+ *
+ * @method self status(string $status)
+ * @method self type(string $post_type)
+ * @method self taxonomy(string $taxonomy)
+ */
 class Post extends Model implements WordPressEntitiable
 {
+    use HasMeta;
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -51,6 +61,15 @@ class Post extends Model implements WordPressEntitiable
     protected $primaryKey = 'ID';
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'laravel_through_key',
+    ];
+
+    /**
      * Describes relationships between models and @return BelongsTo
      *
      * @see User
@@ -58,6 +77,16 @@ class Post extends Model implements WordPressEntitiable
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'post_author');
+    }
+
+    /**
+     * Describes relationships between Models and @return HasMany
+     *
+     * @see Attachment
+     */
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class, 'post_parent', 'ID');
     }
 
     /**
@@ -73,25 +102,36 @@ class Post extends Model implements WordPressEntitiable
     /**
      * Describes relationships between Models and @return HasMany
      *
-     * @see PostMeta
+     * @see Post\Meta
      */
     public function meta(): HasMany
     {
-        return $this->hasMany(PostMeta::class, 'post_id');
+        return $this->hasMany(Post\Meta::class, 'post_id');
+    }
+
+    /**
+     * Describes relationships between Model and @return HasManyThrough
+     *
+     * @see Term::class
+     */
+    public function terms(): HasManyThrough
+    {
+        return $this->hasManyThrough(Term\Taxonomy::class, Term\Relationships::class,
+            'object_id', 'term_id')->with('term');
     }
 
     /**
      * Represents an instance as a \WP_Post WordPress Entity
      *
-     * @return \WP_Post
+     * @return null|\WP_Post
      */
-    public function toWordPressEntity(): \WP_Post
+    public function toWordPressEntity(): ?\WP_Post
     {
-        return new \WP_Post((object)Arr::except($this->toArray(), [
-            'comments',
-            'author',
-            'meta',
-        ]));
+        if (!class_exists(\WP_Post::class)) {
+            return null;
+        }
+
+        return new \WP_Post((object)$this->attributesToArray());
     }
 
     /**
@@ -102,7 +142,7 @@ class Post extends Model implements WordPressEntitiable
      * @param string $status
      * @return Builder
      */
-    public function scopeStatus($query, string $status = 'publish'): Builder
+    public function scopeStatus($query, string $status): Builder
     {
         return $query->where('post_status', $status);
     }
@@ -143,6 +183,12 @@ class Post extends Model implements WordPressEntitiable
      */
     public function scopeType($query, string $type = 'post'): Builder
     {
+        // If there is a global scope already we return as it is.
+        if (static::hasGlobalScope('post_type')
+            && !in_array('post_type', $query->removedScopes(), true)) {
+            return $query;
+        }
+
         return $query->where('post_type', $type);
     }
 }
