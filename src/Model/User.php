@@ -4,6 +4,7 @@ namespace Rumur\WPEloquent\Model;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Rumur\WPEloquent\Concerns\HasMeta;
 use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
 
 /**
@@ -29,6 +30,8 @@ use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
  */
 class User extends Model implements WordPressEntitiable
 {
+    use HasMeta;
+
     /**
      * The primary key for the model.
      *

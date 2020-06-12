@@ -4,10 +4,13 @@ namespace Rumur\WPEloquent\Model;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Rumur\WPEloquent\Concerns\HasMeta;
 use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
 
 class Comment extends Model implements WordPressEntitiable
 {
+    use HasMeta;
+
     /**
      * The name of the "created at" column.
      *
