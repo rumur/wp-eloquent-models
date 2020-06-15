@@ -1,17 +1,17 @@
 <?php
 
-namespace Rumur\WPEloquent\Model;
+namespace Rumur\WordPress\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Rumur\WPEloquent\Concerns\HasMeta;
-use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
-use Rumur\WPEloquent\Scope\HasPostTypeScope;
-use Rumur\WPEloquent\Utils\Serializer;
+use Rumur\WordPress\Eloquent\Concerns\HasMeta;
+use Rumur\WordPress\Eloquent\Model\Contracts\WordPressEntitiable;
+use Rumur\WordPress\Eloquent\Scope\HasPostTypeScope;
+use Rumur\WordPress\Eloquent\Utils\Serializer;
 
 /**
  * Class Attachment
- * @package Rumur\WPEloquent\Model
+ * @package Rumur\WordPress\Eloquent\Model
  *
  * @property-read mixed metadata
  */

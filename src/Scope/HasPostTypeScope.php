@@ -1,6 +1,6 @@
 <?php
 
-namespace Rumur\WPEloquent\Scope;
+namespace Rumur\WordPress\Eloquent\Scope;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Trait HasPostTypeScope
  *
- * @package Rumur\WPEloquent\Scope
+ * @package Rumur\WordPress\Eloquent\Scope
  */
 trait HasPostTypeScope
 {

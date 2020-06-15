@@ -1,9 +1,9 @@
 <?php
 
-namespace Rumur\WPEloquent\Model;
+namespace Rumur\WordPress\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use Rumur\WPEloquent\Utils\Serializer;
+use Rumur\WordPress\Eloquent\Utils\Serializer;
 
 abstract class Meta extends Model
 {

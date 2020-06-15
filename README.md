@@ -19,7 +19,7 @@ The package supports  [Themosis Framework](https://framework.themosis.com/) and 
 ### [Attachments](#attachments)
 ```php
 <?php
-use Rumur\WPEloquent\Model\Attachment;
+use Rumur\WordPress\Eloquent\Model\Attachment;
 
 // Getting an attachment 
 $attachment = Attachment::find(2020);
@@ -36,7 +36,7 @@ $attachment->toWordPressEntity(); // <- ?\WP_Post
 ### [Comments](#comments)
 ```php
 <?php
-use Rumur\WPEloquent\Model\Comment;
+use Rumur\WordPress\Eloquent\Model\Comment;
 
 // Getting a comment
 $comment = Comment::find(2020);
@@ -52,7 +52,7 @@ $comment->toWordPressEntity(); // <- ?\WP_Comment
 ### [Posts](#posts)
 ```php
 <?php
-use Rumur\WPEloquent\Model\Post;
+use Rumur\WordPress\Eloquent\Model\Post;
 
 // Getting a post
 $post = Post::find(2020);
@@ -80,7 +80,7 @@ $orders = Post::with(['author'])->limit(15)->type('order')->get();
 ### [Terms](#terms)
 ```php
 <?php
-use Rumur\WPEloquent\Model\Term;
+use Rumur\WordPress\Eloquent\Model\Term;
 
 // Getting a term with a specific id
 $term = Term::with(['posts'])->find(2020);
@@ -99,7 +99,7 @@ $tags = Term::limit(15)->taxonomy('post_tag')->get();
 ### [Users](#users)
 ```php
 <?php
-use Rumur\WPEloquent\Model\User;
+use Rumur\WordPress\Eloquent\Model\User;
 
 // Getting a user with a specific id
 $user = User::find(2020);
@@ -119,7 +119,7 @@ The models `Attachment`, `Post`, `User`, `Comment`, `Term`, all use the `HasMeta
 
 ```php
 <?php
-use Rumur\WPEloquent\Model\{Attachment, Comment, Post, Term, User};
+use Rumur\WordPress\Eloquent\Model\{Attachment, Comment, Post, Term, User};
 
 $post = Post::find(2020);
 
@@ -158,15 +158,15 @@ Attachment::find(2020)->deleteMeta('any_meta_key');
 
 ### [Creating your own models](#creates)
 
-If you want to create your own model, for instance, an `Product` it might be extended from a Post model, so you just need to apply a global scope with a  specific `post_type`  by adding a `Rumur\WPEloquent\Scope\HasPostTypeScope` trait to a model.
+If you want to create your own model, for instance, an `Product` it might be extended from a Post model, so you just need to apply a global scope with a  specific `post_type`  by adding a `Rumur\WordPress\Eloquent\Scope\HasPostTypeScope` trait to a model.
 
 If your `post_type` is different from a class name of your model, you can explicitly tell which `post_type` you are going to use by adding a specific 
 ```php
 <?php
 namespace App\Model;
 
-use Rumur\WPEloquent\Model\Post;
-use Rumur\WPEloquent\Scope\HasPostTypeScope;
+use Rumur\WordPress\Eloquent\Model\Post;
+use Rumur\WordPress\Eloquent\Scope\HasPostTypeScope;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Product extends Post
@@ -194,8 +194,8 @@ class Product extends Post
 <?php
 namespace App\Model;
 
-use Rumur\WPEloquent\Model\Post;
-use Rumur\WPEloquent\Scope\HasPostTypeScope;
+use Rumur\WordPress\Eloquent\Model\Post;
+use Rumur\WordPress\Eloquent\Scope\HasPostTypeScope;
 
 class Page extends Post
 {

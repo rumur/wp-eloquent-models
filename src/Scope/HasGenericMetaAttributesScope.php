@@ -1,16 +1,16 @@
 <?php
 
-namespace Rumur\WPEloquent\Scope;
+namespace Rumur\WordPress\Eloquent\Scope;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Query\JoinClause;
-use Rumur\WPEloquent\Concerns\HasGenericMetaAttributes;
+use Rumur\WordPress\Eloquent\Concerns\HasGenericMetaAttributes;
 
 /**
  * Trait HasPostTypeScope
  *
- * @package Rumur\WPEloquent\Scope
+ * @package Rumur\WordPress\Eloquent\Scope
  */
 trait HasGenericMetaAttributesScope
 {

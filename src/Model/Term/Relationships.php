@@ -1,6 +1,6 @@
 <?php
 
-namespace Rumur\WPEloquent\Model\Term;
+namespace Rumur\WordPress\Eloquent\Model\Term;
 
 use Illuminate\Database\Eloquent\Model;
 
