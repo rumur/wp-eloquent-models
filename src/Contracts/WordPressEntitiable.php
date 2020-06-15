@@ -1,6 +1,6 @@
 <?php
 
-namespace Rumur\WPEloquent\Contracts;
+namespace Rumur\WordPress\Eloquent\Contracts;
 
 interface WordPressEntitiable {
     /**

@@ -1,18 +1,18 @@
 <?php
 
-namespace Rumur\WPEloquent\Model;
+namespace Rumur\WordPress\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Query\JoinClause;
-use Rumur\WPEloquent\Concerns\HasMeta;
-use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
+use Rumur\WordPress\Eloquent\Concerns\HasMeta;
+use Rumur\WordPress\Eloquent\Model\Contracts\WordPressEntitiable;
 
 /**
  * Class Post
- * @package Rumur\WPEloquent\Model
+ * @package Rumur\WordPress\Eloquent\Model
  *
  * @method self status(string $status)
  * @method self type(string $post_type)

@@ -1,8 +1,8 @@
 <?php
 
-namespace Rumur\WPEloquent\Concerns;
+namespace Rumur\WordPress\Eloquent\Concerns;
 
-use Rumur\WPEloquent\Utils\Serializer;
+use Rumur\WordPress\Eloquent\Utils\Serializer;
 
 trait HasMeta
 {

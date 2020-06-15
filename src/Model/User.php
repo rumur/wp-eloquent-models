@@ -1,11 +1,11 @@
 <?php
 
-namespace Rumur\WPEloquent\Model;
+namespace Rumur\WordPress\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Rumur\WPEloquent\Concerns\HasMeta;
-use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
+use Rumur\WordPress\Eloquent\Concerns\HasMeta;
+use Rumur\WordPress\Eloquent\Model\Contracts\WordPressEntitiable;
 
 /**
  * Class User
@@ -26,7 +26,7 @@ use Rumur\WPEloquent\Model\Contracts\WordPressEntitiable;
  * @property string nickname
  * @property string locale
  *
- * @package Rumur\WPEloquent\Model
+ * @package Rumur\WordPress\Eloquent\Model
  */
 class User extends Model implements WordPressEntitiable
 {

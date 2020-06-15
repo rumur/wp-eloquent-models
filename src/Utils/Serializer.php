@@ -1,6 +1,6 @@
 <?php
 
-namespace Rumur\WPEloquent\Utils;
+namespace Rumur\WordPress\Eloquent\Utils;
 
 class Serializer
 {

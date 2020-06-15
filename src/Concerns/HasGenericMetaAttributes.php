@@ -1,6 +1,6 @@
 <?php
 
-namespace Rumur\WPEloquent\Concerns;
+namespace Rumur\WordPress\Eloquent\Concerns;
 
 trait HasGenericMetaAttributes
 {

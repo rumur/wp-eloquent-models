@@ -1,8 +1,8 @@
 <?php
 
-namespace Rumur\WPEloquent\Model\Term;
+namespace Rumur\WordPress\Eloquent\Model\Term;
 
-use Rumur\WPEloquent\Model\Meta as BaseMeta;
+use Rumur\WordPress\Eloquent\Model\Meta as BaseMeta;
 
 class Meta extends BaseMeta
 {
